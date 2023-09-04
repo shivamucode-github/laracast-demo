@@ -2,23 +2,34 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node\Expr\Cast\Array_;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory,Sluggable;
 
     protected $fillable = [
         'title',
         'body',
         'subject',
         'slug',
-        'category_id'
+        'category_id',
+        'user_id'
     ];
 
     protected $with = ['category', 'user'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function category()
     {
@@ -71,5 +82,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

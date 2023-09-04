@@ -1,7 +1,7 @@
 @extends('auth.layout.main')
 @section('main')
     <section class="w-full pt-8">
-        <form action="/register" class="w-1/2 m-auto py-4 px-24 bg-gray-200 border border-gray-400 rounded-xl space-y-3"
+        <form action="/register" enctype="multipart/form-data" class="w-1/2 m-auto py-4 px-24 bg-gray-200 border border-gray-400 rounded-xl space-y-3"
             method="post">
             @csrf
             <h2 class="text-4xl pb-4 font-semibold">Register Here ..</h2>
@@ -40,6 +40,16 @@
                 <input required type="password" id="confirm_password" name="confirm_password"
                     class="px-3 py-1 border-2 border-gray-300 bg-white rounded-lg w-full">
                 @error('confirm_password')
+                    <span class="text-red-500 text-sm">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+            <div>
+                <label for="image">Confirm Password</label>
+                <input type="file" id="image" name="image"
+                    class="px-3 py-1 border-2 border-gray-300 bg-white rounded-lg w-full">
+                @error('image')
                     <span class="text-red-500 text-sm">
                         {{ $message }}
                     </span>

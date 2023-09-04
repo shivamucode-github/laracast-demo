@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'test',
-            'email' => 'test@yopmail.com',
+            'name' => 'admin',
+            'email' => 'admin@admin',
             'password' => Hash::make('123456789'),
             'slug' => fake()->slug(1),
+            'image' => null
         ]);
     }
 }

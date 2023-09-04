@@ -17,10 +17,17 @@ class RegisterController extends Controller
 
     public function store(RegisterationRequest $request)
     {
+        if ($request->image) {
+            $image = User::storeImage($request->image);
+        } else {
+            $image = null;
+        }
+
         $user = User::create([
             'name' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'image' => $image
         ]);
 
         if ($user) {

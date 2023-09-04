@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
         'slug'
     ];
 
@@ -58,5 +59,11 @@ class User extends Authenticatable
                 'source' => 'name'
             ]
         ];
+    }
+
+    public static function storeImage($image)
+    {
+        $imageName = md5_file($image);
+        return $image->storeAs('images', $imageName . '.png', 'public');
     }
 }
